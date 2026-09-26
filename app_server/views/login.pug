@@ -1,31 +1,34 @@
-extends layout 
+extends layout
 
-block content 
-    .container 
-        .row.justify-content-center 
-            .col-12.col-md-8.col-lg-6 
-                h1 Login 
+block content
+  .container
+    .row.justify-content-center.mt-5
+      .col-12.col-md-8.col-lg-6
+        .card.login-card.shadow-sm.rounded
+          .card-body.p-4.p-md-5
+            form
+              fieldset
+                h1.mb-4 Login
 
-                form
-                    .mb-3 
-                        label.form-label(for='email') Email 
-                        input#email.form-control(
-                            type='email'
-                            name='email'
-                            placeholder='Enter your email'
-                            required
-                        )
-                    .mb-3 
-                        label.form-label(for='password') Password 
-                        input#password.form-control(
-                            type='password'
-                            name='password'
-                            placeholder='Enter your password'
-                        ) 
+                div
+                  label.form-label(for='exampleInputEmail1') Email address
+                  input#exampleInputEmail1.form-control(
+                    type='email'
+                    aria-describedby='emailHelp'
+                    placeholder='Enter email'
+                  )
+                  
 
-                    button.btn.btn-primary(type='submit') Login
-                p.mt-3 
-                    | Don't have an account?
-                    a(href='/register') Register here 
+                div
+                  label.form-label.mt-4(for='exampleInputPassword1') Password
+                  input#exampleInputPassword1.form-control(
+                    type='password'
+                    placeholder='Password'
+                    autocomplete='off'
+                  )
 
-                
+                p.mt-3
+                  | Not registered?
+                  a(href='#') Create an account
+
+                button.btn.btn-primary.mt-3(type='submit') Submit

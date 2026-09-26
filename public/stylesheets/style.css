@@ -1,6 +1,7 @@
 body {
   
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #CFCFCF;
 
 }
 
@@ -14,5 +15,15 @@ h1{
   font-size: 40px;
 
   
+}
+
+.navbar-brand img{
+  height:70px;
+  width: auto;
+}
+
+.login-card{
+  background-color: #800020;
+  color:white;
 }
 
