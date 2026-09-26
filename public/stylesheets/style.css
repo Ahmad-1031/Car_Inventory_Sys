@@ -1,7 +1,7 @@
 body {
-  padding: 50px;
+  
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color:#00B7FF;
+
 }
 
 a {
@@ -12,10 +12,7 @@ a {
 h1{
   font-family: Georgia, serif;
   font-size: 40px;
-  color:white;
+
   
 }
 
-h1 i{
-  margin-right: 10px;
-}
