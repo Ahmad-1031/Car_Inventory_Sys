@@ -17,13 +17,19 @@ h1{
   
 }
 
+.navbar{
+  
+}
+
 .navbar-brand img{
   height:70px;
   width: auto;
+  
 }
 
 .login-card{
   background-color: #800020;
   color:white;
 }
-
+/*#5D2432
+//#800020*/
