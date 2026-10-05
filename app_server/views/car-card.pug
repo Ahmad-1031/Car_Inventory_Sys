@@ -1,0 +1,22 @@
+mixin CarCard(make, model, year, price, mileage, fuel, transmission, image)
+  .card.car-card
+    .car-image
+      img(src=image alt=`${make} ${model}`)
+    .card-body
+      h3.card-title= `${make} ${model}`
+      p.text-muted.mb-2= year
+      .car-details
+        span
+          strong= mileage
+          |  miles
+        span
+          | Fuel Type: 
+          strong= fuel
+        span
+          | Transmission: 
+          strong= transmission
+      hr
+      .car-footer
+        h4.price= `€${price}`
+        a.btn.btn-primary(href='#') View Details
+

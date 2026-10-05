@@ -1,0 +1,16 @@
+extends layout
+include car-card
+
+block content
+    include navbar.pug
+
+    .container 
+        .row 
+            .col-md-4.d-flex
+
+                +CarCard('Audi', 'A6 C7', 2015, '14,500', '177,000', 'Diesel', 'Automatic',"https://primary.jwwb.nl/public/j/w/n/temp-mdjsksuaqfulgktptwwc/1-high-h4l79t.jpg")
+            .col-md-4
+                +CarCard('Audi', 'A7', 2018, '26,500', '135,000', 'Diesel', 'Automatic','https://f7432d8eadcf865aa9d9-9c672a3a4ecaaacdf2fee3b3e6fd2716.ssl.cf3.rackcdn.com/C3132/U170/IMG_5102-large.jpg')
+            .col-md-4
+                +CarCard('Audi', 'A8', 2017, '32,500', '118,000', 'Diesel', 'Automatic','https://canautoperformance.com/cdn/shop/collections/D4_S8.jpg?v=1694187536&width=2048')
+                
