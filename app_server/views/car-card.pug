@@ -1,4 +1,4 @@
-mixin CarCard(make, model, year, price, mileage, fuel, transmission, image)
+mixin CarCard(make, model, engine, power, year, price, mileage, fuel, transmission, image)
   .card.car-card
     .car-image
       img(src=image alt=`${make} ${model}`)
@@ -7,8 +7,14 @@ mixin CarCard(make, model, year, price, mileage, fuel, transmission, image)
       p.text-muted.mb-2= year
       .car-details
         span
+          | Engine: 
+          strong=engine
+        span 
+          | Power:
+          strong=power
+        span
           strong= mileage
-          |  miles
+          |  Kms
         span
           | Fuel Type: 
           strong= fuel
