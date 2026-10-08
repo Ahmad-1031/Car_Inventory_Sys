@@ -1,6 +1,6 @@
 /* GET home page */
 const home = function(req, res){
-  res.render('home', { title: 'Home' });
+  res.render('home',{title: 'Home'});
 };
 
 
@@ -14,14 +14,9 @@ const register = function(req,res){
   res.render('register',{title:'Register'});
 }
 
-/*Get Inventory Page */
-const inventory = function(req,res){
-  res.render('inventory',{titie:'Inventory'})
-}
 
 module.exports = {
   home,
   login,
-  register,
-  inventory
+  register
 };
