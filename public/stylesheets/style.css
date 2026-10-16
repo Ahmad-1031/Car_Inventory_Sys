@@ -27,6 +27,28 @@ h1{
   
 }
 
+/*-----------------------------*/
+
+/*Admin dropdown*/
+.navbar .dropdown-menu{
+  margin-top: 10px;
+  padding: 8px;
+  border:none;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.navbar .dropdown-item:hover{
+  tranform: translateX(4px);
+}
+
+.navbar .dropdown-divider{
+  margin: 6px 4px;
+}
+
+
+/*---------------------------------*/
+
 .login-card{
   background-color: #800020;
   color:white;
