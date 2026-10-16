@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbURI = "mongodb+srv://ahnadshahzad10119_db_user:Test1212@cluster0.fsqkrnm.mongodb.net/carsys?retryWrites=true&w=majority";
+const dbURI = process.env.MONGODB_URI;
 
 try {
   mongoose.connect(
@@ -12,4 +12,4 @@ try {
   console.log("could not connect");
 }
 
-require('./locations');
+require('./cars');

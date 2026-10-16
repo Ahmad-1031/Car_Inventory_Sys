@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const mongoose = require('mongoose');
-
 const carSchema = new mongoose.Schema({
   make: {
     type: String,
