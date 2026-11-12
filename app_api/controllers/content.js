@@ -2,20 +2,39 @@ const mongoose = require('mongoose');
 const Car = mongoose.model('Car');
 
 
-const contentList = async function (req, res) {
+const retrieveCars = async function (organisationId) {
 
-    try {
-        const cars = await Car.find({});
-        res.status(200).json(cars);
+    const cars = await Car.find({
+        organisation: organisationId
+    });
 
-    } catch (err){
-        res.status(500).json({
-            message: "Error retrieving cars",
-            error: err.message
-        });
-    }
+    return cars
 
  };
+
+ const inventoryPage = async function (req,res){
+    try{
+        if (!req.session || !req.session.userId || !req.session.organisationId) {
+            return res.redirect('/login');
+        }
+
+        const cars = await retrieveCars(
+            req.session.organisationId
+        );
+
+        return res.render('inventory',{
+            title:'AutoVault Inventory',
+            cars: cars
+        });
+
+
+    } catch(err){
+        console.error('Error loading inventory page', err);
+        return res.status(500).send('Error Loading inventory page');
+    }
+ };
+
+
 const contentCreateOne = function (req, res) {
     res
     .status(200)
@@ -38,7 +57,7 @@ const contentDeleteOne = function (req, res) {
  };
 
 module.exports = {
-    contentList,
+    inventoryPage,
     contentCreateOne,
     contentReadOne,
     contentUpdateOne,

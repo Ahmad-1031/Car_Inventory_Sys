@@ -12,3 +12,4 @@ mongoose.connect(dbURI)
 
 require('./cars');
 require('./user');
+require('./organisation');

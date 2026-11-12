@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 
 const carSchema = new mongoose.Schema({
+
+  organisation: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Organisation',
+    required: true
+  },
+
   make: {
     type: String,
     required: true

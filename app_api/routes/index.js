@@ -5,10 +5,19 @@ const ctrlUser = require('../controllers/auth');
 const ctrlContent = require('../controllers/content');
 
 
+
+//Login
+router.post('/login',ctrlUser.userLogin);
+
+
+//Inventory
+router.get('/inventory',ctrlContent.inventoryPage);
+
+
 //Users
 router
     .route('/users')
-    .post(ctrlUser.userCreateOne)
+    .post(ctrlUser.userCreateOne);
 
 router
     .route('/users/:userid')
@@ -17,10 +26,9 @@ router
     .delete(ctrlUser.userDeleteOne);
 
 
-// inventory
+// Content
 router
     .route('/content')
-    .get(ctrlContent.contentList)
     .post(ctrlContent.contentCreateOne);
 
 router

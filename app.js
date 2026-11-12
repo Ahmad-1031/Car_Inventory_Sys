@@ -1,3 +1,5 @@
+const session = require('express-session');
+const MongoStore = require('connect-mongo').default;
 require('dotenv').config();
 require('./app_api/models/db');
 var createError = require('http-errors');
@@ -21,6 +23,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// SESSION MIDDLEWARE
+app.use(session({
+  name: 'autovault.sid',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI
+  }),
+  cookie: {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 1000 * 60 * 60 * 24
+  }
+}));
 
 app.use('/api', apiRoutes);
 app.use('/', webRoutes);

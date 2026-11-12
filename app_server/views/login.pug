@@ -7,23 +7,35 @@ block content
       .col-12.col-md-8.col-lg-6
         .card.login-card.shadow-sm.rounded
           .card-body.p-4.p-md-5
-            form
+            form(action='/api/login' method='POST')
               fieldset
                 h2.mb-4 Login
-
+              .mb-3
+                div 
+                  label.form-label(for='organisation') Organization 
+                  select#organisation.form-select(
+                    name='organisation'
+                    required
+                  )
+                    option(value='' selected disabled) Select your organisastion 
+                    option(value='1') AutoVault Tralee 
+                    option(value='2') Killarney Auto Sales
+              .mb-3
                 div
                   label.form-label(for='exampleInputEmail1') Email address
                   input#exampleInputEmail1.form-control(
                     type='email'
+                    name='email'
                     aria-describedby='emailHelp'
                     placeholder='Enter email'
                   )
                   
-
+              .mb-3
                 div
-                  label.form-label.mt-4(for='exampleInputPassword1') Password
+                  label.form-label(for='exampleInputPassword1') Password
                   input#exampleInputPassword1.form-control(
                     type='password'
+                    name='password'
                     placeholder='Password'
                     autocomplete='off'
                   )
