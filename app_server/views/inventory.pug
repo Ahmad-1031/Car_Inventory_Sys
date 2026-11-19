@@ -5,20 +5,7 @@ block content
     include navbar.pug
     
     .container
-        .row 
-            each car in cars 
-                .col-md-4 
-                    +CarCard(
-                        car.make,
-                        car.model,
-                        car.engine,
-                        car.power,
-                        car.year,
-                        car.price,
-                        car.mileage,
-                        car.fuel,
-                        car.transmission,
-                        car.image
-                    )
+        app-car-list Loading... 
                 
-                
+block scripts 
+    script(type='module', src='/build/main-6ZTA73MD.js')

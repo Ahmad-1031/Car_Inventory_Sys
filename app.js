@@ -6,6 +6,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const cors = require('cors');
 const webRoutes = require('./app_server/routes/index');
 const apiRoutes = require('./app_api/routes/index');
 
@@ -16,11 +17,17 @@ var app = express();
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'pug');
 
+app.use('/api',cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET','POST','PUT','DELETE'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type','Accept']
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app_public')));
 
 app.use('/api', apiRoutes);
 app.use('/', webRoutes);
