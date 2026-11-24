@@ -22,7 +22,7 @@ export class Car{
 export class CarData{
     private http = inject(HttpClient);
 
-    private apiBaseURL = 'http://localhost:3000/api';
+    private apiBaseURL = '/api';
 
     public async getCars(): Promise<Car[]> {
         const url = `${this.apiBaseURL}/content`;

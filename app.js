@@ -6,6 +6,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+
 const cors = require('cors');
 const webRoutes = require('./app_server/routes/index');
 const apiRoutes = require('./app_api/routes/index');
@@ -19,6 +23,20 @@ const csrfMiddleware = require('./middleware/csrf');
 
 
 var app = express();
+
+var credentials;
+
+if(process.env.NODE_ENV !== 'production'){
+  
+  var privateKey = fs.readFileSync('./sslcert/key.pem','utf8');
+  var certificate = fs.readFileSync('./sslcert/cert.pem', 'utf8');
+
+  var credentials = {
+    key: privateKey,
+    cert: certificate
+  };
+
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
@@ -40,7 +58,7 @@ app.use(session({
   cookie: {
     maxAge: 1000 * 60 * 60 * 24,
     httpOnly: true,
-    secure: false,
+    secure: true,
     sameSite: 'lax'
   }
 }));
@@ -80,3 +98,22 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+if(process.env.NODE_ENV === 'production'){
+  app.set('trust proxy',1);
+}
+
+
+if (process.env.NODE_ENV !== 'production'){
+
+  var httpsServer = https.createServer(credentials,app);
+  httpsServer.listen(443);
+
+  console.log('HTTPS server running on https://localhost');
+}else{
+
+  var httpServer = http.createServer(app);
+  httpServer.listen(process.env.PORT || 3000, '0.0.0.0');
+
+  console.log('Http server running behind Render proxy');
+}
