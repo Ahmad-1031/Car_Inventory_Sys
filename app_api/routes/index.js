@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const ctrlUser = require('../controllers/auth');
-const ctrlContent = require('../controllers/content');
+const ctrlContent = require('../controllers/carController');
+const authMiddleware = require('../../middleware/auth');
 
 
 //Users
@@ -20,7 +21,7 @@ router
 // inventory
 router
     .route('/content')
-    .get(ctrlContent.contentList)
+    .get(authMiddleware.requiredApiAuth,ctrlContent.contentList)
     .post(ctrlContent.contentCreateOne);
 
 router

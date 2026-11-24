@@ -1,7 +1,16 @@
 
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose').default;
+
 
 const userSchema = new mongoose.Schema({
+
+  organisationId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Organisation',
+    required: true
+  },
+
   username: {
     type: String,
     required: true,
@@ -12,10 +21,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  password: {
-    type: String,
-    required: true
-  }
+ 
+});
+
+userSchema.plugin(passportLocalMongoose,{
+  usernameField: 'email'
 });
 
 mongoose.model('User', userSchema);

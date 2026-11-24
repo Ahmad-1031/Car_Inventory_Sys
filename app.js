@@ -10,6 +10,13 @@ const cors = require('cors');
 const webRoutes = require('./app_server/routes/index');
 const apiRoutes = require('./app_api/routes/index');
 
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const csrfMiddleware = require('./middleware/csrf');
+
 
 var app = express();
 
@@ -26,6 +33,29 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'lax'
+  }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(csrfMiddleware.generateCsrfToken);
+
+passport.use(new LocalStrategy({
+  usernameField: 'email'
+}, User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_public')));
 

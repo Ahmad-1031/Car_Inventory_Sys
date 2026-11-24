@@ -1,18 +1,29 @@
 const express = require('express');
 const router = express.Router();
 
-const ctrlLocations = require('../controllers/location'); 
-const ctrlOthers = require('../controllers/others');
 
+const ctrlPages = require('../controllers/pages');
 const ctrlContent = require('../controllers/content')
+const ctrlAuth = require('../controllers/auth');
+const ctrlInventory = require('../controllers/inventory');
+const authMiddleware = require('../../middleware/auth');
+const csrfMiddleware = require('../../middleware/csrf');
 
 
-router.get('/',ctrlOthers.home)
-router.get('/login',ctrlOthers.login)
-router.get('/register',ctrlOthers.register)
+//Page Routes Guests
+router.get('/',ctrlPages.login)
+router.get('/login',ctrlPages.login)
+router.get('/register',ctrlPages.register)
 
-router.get('/inventory',ctrlContent.inventory)
-router.get('/inventory/:id',ctrlContent.content)
+
+//Login & logout
+router.post('/login',csrfMiddleware.validateCsrfToken ,ctrlAuth.login);
+router.post('/logout',csrfMiddleware.validateCsrfToken ,ctrlAuth.logout);
+
+
+//Inventory Pages
+router.get('/inventory',authMiddleware.requiredAuth,ctrlContent.inventory)
+
 
 module.exports = router;
 

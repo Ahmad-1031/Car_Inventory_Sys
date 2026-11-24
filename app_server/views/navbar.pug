@@ -22,3 +22,7 @@ nav.navbar.navbar-expand-lg.bg-primary(data-bs-theme='dark')
           form.d-flex
             input.form-control.me-sm-2(type='search' placeholder='Search')
             button.btn.btn-secondary.my-2.my-sm-0(type='submit') Search
+
+          form.ms-lg-3(action='/logout' method='POST')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            button.btn.btn-danger(type='submit') Logout
